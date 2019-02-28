@@ -5,4 +5,17 @@ Personal Area for clients and managers. Test project on Symfony 4.
 
 Представляет из себя переделанный под Symfony 4 проект https://github.com/Al-faqun/g-soft
 
+Требования: те же, что у symfony 4, php >= 7.2
 Установка: composer install.
+
+Готовые пользователи:
+1) Клиент
+username: 'First User'
+pass: '123456'
+2) Менеджер
+username: 'First manager'
+pass: '123456'
+3) Администратор
+username: 'Admin'
+pass: '123456'
+Зарегистрированные менеджеры требуют подтверждения со стороны администратора, прежде чем они могут что-то видеть.
