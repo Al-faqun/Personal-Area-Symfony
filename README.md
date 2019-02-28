@@ -5,7 +5,8 @@ Personal Area for clients and managers. Test project on Symfony 4.
 
 Представляет из себя переделанный под Symfony 4 проект https://github.com/Al-faqun/g-soft
 
-Требования: те же, что у symfony 4, php >= 7.2
+Требования те же, что у symfony 4, php >= 7.2
+
 Установка: composer install.
 
 Готовые пользователи:
