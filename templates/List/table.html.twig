@@ -37,15 +37,16 @@
 						</td>
 						<td id="cargo_{{ item.getId() }}_datearrival">{{ item.getDateArrival().format('Y-m-d H:i:s') }}</td>
 						<td id="cargo_{{ item.getId() }}_status">{{ item.getStatus() }}</td>
+						{% if is_granted('ROLE_MANAGER') %}
 						<td>
-							{% if is_granted('ROLE_MANAGER') and item.isOwned(user) %}
+							{% if item.isOwned(user) %}
 								<button type="button" class="btn btn-secondary btn-manager pull-right"
 								        onclick="openEditDialog({{ item.getId() }})">
 									Редактировать
 								</button>
 							{% endif %}
 						</td>
-						
+						{% endif %}
 						{% if is_granted('ROLE_MANAGER') and awaiting is defined %}
 							<td>
 								<button type="button" class="btn btn-secondary btn-manager pull-right"
