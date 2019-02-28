@@ -68,9 +68,9 @@
 
 
 <div class="pull-right xls-buttons">
-	<button type="button" class="btn btn-secondary" onclick="loadXls()"> Скачать как xls-файл</button>
+	<!--<button type="button" class="btn btn-secondary" onclick="loadXls()"> Скачать как xls-файл</button>
 	<button type="button" class="btn btn-secondary" onclick="xlsToEmail()">Отослать xls-файл мне на почту</button>
-	
+	-->
 	{% if is_granted('ROLE_CLIENT') %}
 		<button type="button" class="btn btn-secondary" onclick="openCargoDialog()">Добавить новый груз</button>
 	{% endif %}
