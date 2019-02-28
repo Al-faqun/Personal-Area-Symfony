@@ -1,4 +1,4 @@
-{% if (is_granted('ROLE_USER') and pagination is not same as(false)) %}
+{% if (is_granted('ROLE_USER') and pagination is defined and pagination is not same as(false)) %}
 
 <div class="cargo">
 	<div class="align-middle table-responsive" >

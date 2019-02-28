@@ -19,7 +19,10 @@ class CargoController extends AbstractController
     public function index(Request $request, AuthorizationCheckerInterface $authChecker, PaginatorInterface $paginator)
     {
         $messages = [];
-        if ($authChecker->isGranted(['ROLE_CLIENT'])) {
+        if ($authChecker->isGranted(['ROLE_ADMIN'])) {
+            return $this->redirectToRoute('approve_manager');
+            
+        } elseif ($authChecker->isGranted(['ROLE_CLIENT'])) {
             $em = $this->getDoctrine()->getManager();
             $user = $this->getUser();
             $client = $em->getRepository(Client::class)->findByUserId($user->getId());
