@@ -7,10 +7,18 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\HttpFoundation\Request;
 
+/**
+ * Class InfoController
+ * @package App\Controller
+ */
 class InfoController extends AbstractController
 {
     
-    
+    /**
+     * Get data about manager by ajax
+     * @param $id
+     * @return \Symfony\Component\HttpFoundation\JsonResponse
+     */
     public function manager($id)
     {
         $em = $this->getDoctrine()->getManager();
@@ -30,6 +38,11 @@ class InfoController extends AbstractController
         return $this->json($response);
     }
     
+    /**
+     * Get data about client by ajax
+     * @param $id
+     * @return \Symfony\Component\HttpFoundation\JsonResponse
+     */
     public function client($id)
     {
         $em = $this->getDoctrine()->getManager();

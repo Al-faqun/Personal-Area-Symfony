@@ -16,6 +16,11 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Length;
 
+/**
+ * Registration form for manager
+ * Class RegManagerForm
+ * @package App\Form
+ */
 class RegManagerForm extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)

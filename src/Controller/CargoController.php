@@ -12,10 +12,21 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
-
+/**
+ * Class CargoController
+ * @package App\Controller
+ */
 class CargoController extends AbstractController
 {
-
+    
+    /**
+     * Show list of cargo for authorized user
+     * List if different for clients and managers
+     * @param Request $request
+     * @param AuthorizationCheckerInterface $authChecker
+     * @param PaginatorInterface $paginator
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
+     */
     public function index(Request $request, AuthorizationCheckerInterface $authChecker, PaginatorInterface $paginator)
     {
         $messages = [];
@@ -99,7 +110,12 @@ class CargoController extends AbstractController
         return $response;
     }
     
-    
+    /**
+     * Create new cargo as client
+     * @param Request $request
+     * @param ValidatorInterface $validator
+     * @return \Symfony\Component\HttpFoundation\JsonResponse
+     */
     public function new(Request $request, ValidatorInterface $validator)
     {
         $this->denyAccessUnlessGranted('ROLE_CLIENT');
@@ -131,6 +147,12 @@ class CargoController extends AbstractController
         return $this->json($result);
     }
     
+    /**
+     * Assign manager to cargo
+     * @param Request $request
+     * @param ValidatorInterface $validator
+     * @return \Symfony\Component\HttpFoundation\JsonResponse
+     */
     public function setManager(Request $request, ValidatorInterface $validator)
     {
         $this->denyAccessUnlessGranted('ROLE_MANAGER');
@@ -158,6 +180,12 @@ class CargoController extends AbstractController
         return $this->json($result);
     }
     
+    /**
+     * Change cargo's properties
+     * @param Request $request
+     * @param ValidatorInterface $validator
+     * @return \Symfony\Component\HttpFoundation\JsonResponse
+     */
     public function edit(Request $request, ValidatorInterface $validator)
     {
         $this->denyAccessUnlessGranted('ROLE_MANAGER');
@@ -190,6 +218,12 @@ class CargoController extends AbstractController
         return $this->json($result);
     }
     
+    /**
+     * As manager, get list on unassigned cargo  to supervise
+     * @param Request $request
+     * @param PaginatorInterface $paginator
+     * @return Response
+     */
     public function awaiting(Request $request, PaginatorInterface $paginator)
     {
         $this->denyAccessUnlessGranted('ROLE_MANAGER');

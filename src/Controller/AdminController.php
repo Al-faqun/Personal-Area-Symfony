@@ -6,10 +6,18 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\HttpFoundation\Request;
 
+/**
+ * Class AdminController
+ * @package App\Controller
+ */
 class AdminController extends AbstractController
 {
-
     
+    /**
+     * As admin, approve pending managers
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
     public function approveManagers(Request $request)
     {
         $this->denyAccessUnlessGranted('ROLE_ADMIN', 'Unable to access this page!');
