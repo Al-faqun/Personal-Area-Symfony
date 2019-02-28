@@ -1,0 +1,78 @@
+{% if (is_granted('ROLE_USER') and pagination is not same as(false)) %}
+
+<div class="cargo">
+	<div class="align-middle table-responsive" >
+		<table class="table table-bordered">
+			<caption class="text-center">{{ caption }}</caption>
+			<thead class="">
+			<tr>
+				<th>ID груза</th>
+				<th>Номер контейнера</th>
+				<th>Компания-клиент</th>
+				<th>Фамилия, Имя менеджера</th>
+				<th>Ожидаемая дата прибытия</th>
+				<th>Статус</th>
+				{% if is_granted('ROLE_MANAGER') %}
+					<th>Изменить данные</th>
+				{% endif %}
+				{% if is_granted('ROLE_MANAGER') and awaiting is defined %}
+					<th>Взять себе</th>
+				{% endif %}
+			</tr>
+			</thead>
+			<tbody>
+			
+				{% for item in pagination %}
+					<tr id="cargo_{{ item.getId() }}">
+						<td id="cargo_{{ item.getId() }}_id">{{ item.getId() }}</td>
+						<td id="cargo_{{ item.getId() }}_container">{{ item.getContainer() }}</td>
+						<td id="cargo_{{ item.getId() }}_clientname"
+						    onClick='getClientInfo( {{ item.getClient().getId() ?? 0 }} )'>
+							{{ item.getClient().getCompanyName() ?? 'Не указан'}}
+						</td>
+						<td id="cargo_{{ item.getId() }}_manname" onClick='getManagerInfo( {{ item.getManager().getId() ?? 0 }} )'>
+							{{ (item.getManager() is not null)
+							? (item.getManager().getSurname() ~ " " ~ item.getManager().getName())
+							: 'Не указан'}}
+						</td>
+						<td id="cargo_{{ item.getId() }}_datearrival">{{ item.getDateArrival().format('Y-m-d H:i:s') }}</td>
+						<td id="cargo_{{ item.getId() }}_status">{{ item.getStatus() }}</td>
+						<td>
+							{% if is_granted('ROLE_MANAGER') and item.isOwned(user) %}
+								<button type="button" class="btn btn-secondary btn-manager pull-right"
+								        onclick="openEditDialog({{ item.getId() }})">
+									Редактировать
+								</button>
+							{% endif %}
+						</td>
+						
+						{% if is_granted('ROLE_MANAGER') and awaiting is defined %}
+							<td>
+								<button type="button" class="btn btn-secondary btn-manager pull-right"
+								onclick="makeExecutor({{ item.getId() }})">
+									Назначить себя исполнителем
+								</button>
+							</td>
+						{% endif %}
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+</div>
+
+<div class="navigation">
+	{{ knp_pagination_render(pagination) }}
+</div>
+
+
+<div class="pull-right xls-buttons">
+	<button type="button" class="btn btn-secondary" onclick="loadXls()"> Скачать как xls-файл</button>
+	<button type="button" class="btn btn-secondary" onclick="xlsToEmail()">Отослать xls-файл мне на почту</button>
+	
+	{% if is_granted('ROLE_CLIENT') %}
+		<button type="button" class="btn btn-secondary" onclick="openCargoDialog()">Добавить новый груз</button>
+	{% endif %}
+</div>
+
+{% endif %}

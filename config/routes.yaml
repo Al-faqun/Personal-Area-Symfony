@@ -1,0 +1,78 @@
+index:
+    path: /
+    controller: Symfony\Bundle\FrameworkBundle\Controller\RedirectController::redirectAction
+    defaults:
+        route: show_cargo
+        permanent: true
+
+show_cargo:
+    path: /cargo
+    controller: App\Controller\CargoController::index
+    options:
+        expose: true
+
+new_cargo:
+    path: /cargo/new
+    controller: App\Controller\CargoController::new
+    options:
+        expose: true
+
+edit_cargo:
+    path: /cargo/edit
+    controller: App\Controller\CargoController::edit
+    options:
+        expose: true
+
+set_manager:
+    path: /cargo/manager
+    controller: App\Controller\CargoController::setManager
+    options:
+        expose: true
+
+app_logout:
+    path: /logout
+    options:
+        expose: true
+
+app_register:
+    path: /register/client
+    controller: App\Controller\RegistrationController::registerClient
+
+register_old:
+    path: /register
+    controller: Symfony\Bundle\FrameworkBundle\Controller\RedirectController::redirectAction
+    defaults:
+        route: app_register
+        permanent: true
+
+app_login:
+    path: /login
+    controller: App\Controller\SecurityController::login
+
+reg_manager:
+    path: /register/manager
+    controller: App\Controller\RegistrationController::registerManager
+
+approve_manager:
+    path: /admin/managers
+    controller: App\Controller\AdminController::approveManagers
+
+info_manager:
+  path: /manager/{id}
+  controller: App\Controller\InfoController::manager
+  options:
+      expose: true
+  requirements:
+      id: '\d+'
+
+info_client:
+  path: /client/{id}
+  controller: App\Controller\InfoController::client
+  options:
+      expose: true
+  requirements:
+      id: '\d+'
+
+awaiting_cargo:
+    path: /cargo/awaiting
+    controller: App\Controller\CargoController::awaiting
