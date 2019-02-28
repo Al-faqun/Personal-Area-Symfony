@@ -11,12 +11,21 @@ Personal Area for clients and managers. Test project on Symfony 4.
 
 Готовые пользователи:
 1) Клиент
+
 username: 'First User'
+
 pass: '123456'
+
 2) Менеджер
+
 username: 'First manager'
+
 pass: '123456'
+
 3) Администратор
+
 username: 'Admin'
+
 pass: '123456'
+
 Зарегистрированные менеджеры требуют подтверждения со стороны администратора, прежде чем они могут что-то видеть.
