@@ -7,7 +7,7 @@ Personal Area for clients and managers. Test project on Symfony 4.
 
 Требования те же, что у symfony 4, php >= 7.2
 
-Установка: composer install.
+Установка: composer install, база данных в папке sql.
 
 Готовые пользователи:
 1) Клиент
